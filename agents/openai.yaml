@@ -1,0 +1,6 @@
+interface:
+  display_name: "MG动画思路策划"
+  short_description: "从主题确认到自动编号垫图与完整提示词的MG动画策划流程"
+  brand_color: "#6C5CE7"
+  default_prompt: "使用 $mg-animation-planner 为一个中文知识主题完成MG动画策划、编号垫图与完整提示词。"
+

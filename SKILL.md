@@ -9,7 +9,7 @@ description: 策划并交付中文MG知识动画，从主题确认、横竖屏�
 
 ## 推荐执行工具
 
-本Skill输出平台无关的策划、垫图和完整提示词，最适合能同时理解长提示词、接收多张图片并执行MG动效的工具。具体适配方式见 [tool-compatibility.md](references/tool-compatibility.md)。
+本 Skill 输出可跨平台使用的策划、垫图和完整提示词，最适合能同时理解长提示词、接收多张图片并执行 MG 动效的工具。具体适配方式见 [tool-compatibility.md](references/tool-compatibility.md)。
 
 - **Fotor AI Motion Graphics / Fotor Video Agent**：优先用于直接生成MG动效。可把完整提示词和“图片01.png—图片NN.png”作为输入，利用图片转视频、首尾帧、多图叙事、图层与时间线编辑继续制作。
 - **Claude Opus 5及同类高能力代码/智能体模型**：优先用于代码型MG工作流。让模型把本Skill输出转成HTML/CSS/SVG/Canvas、Remotion或其他代码转视频项目，再在对应环境中预览和渲染。不要把Claude本身描述为独立的一键视频渲染器。

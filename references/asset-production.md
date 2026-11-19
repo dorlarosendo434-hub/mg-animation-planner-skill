@@ -79,8 +79,7 @@
 & "C:\Users\<用户名>\.codex\skills\mg-animation-planner\scripts\package_mg_assets.ps1" `
   -ManifestPath "C:\project\manifest.json" `
   -OutputDir "C:\project\final-assets" `
-  -AspectRatio "<16:9|9:16|4:3|3:4|1:1>" `
-  -CreateZip
+  -AspectRatio "<16:9|9:16|4:3|3:4|1:1>"
 ```
 
 画幅默认尺寸：
@@ -91,7 +90,7 @@
 - `3:4` → 1080×1440；
 - `1:1` → 1080×1080。
 
-透明素材原样复制以保留Alpha；完整场景居中裁切并转为不透明PNG。若目标文件已存在，脚本默认停止；只有明确允许覆盖本次生成物时才使用`-Force`。
+透明素材必须是 PNG，且同时含可见主体和透明像素，原样复制以保留 Alpha；完整场景居中裁切并转为不透明 PNG。检查裁切后关键主体和安全区是否仍完整。若目标文件已存在，脚本默认停止；只有明确允许覆盖本次生成物时才使用`-Force`。`-CreateZip` 只归档脚本运行时目录已有的文件；完整素材包按 [交付模板](deliverable-template.md#推荐交付结构) 在文稿就绪后再压缩。
 
 ## 图片生成提示词要点
 

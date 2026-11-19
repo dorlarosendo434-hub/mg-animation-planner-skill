@@ -39,9 +39,9 @@
 
 [Fotor AI Motion Graphics Generator](https://www.fotor.com/ai-video-generator/motion-graphics/)和[Fotor Video Agent](https://www.fotor.com/video/)适合接收结构化提示词、图片、首尾帧和多媒体素材，继续完成MG动效、字幕、音频和时间线编辑。
 
-### Claude Opus 5类模型：代码型MG工作流
+### 代码型MG工作流
 
-[Claude Opus 5](https://www.anthropic.com/news/claude-opus-5)及同类高能力代码/智能体模型适合把分镜和素材映射转成HTML/CSS/SVG/Canvas、Remotion或其他代码转视频项目。它们负责理解策划、编写和迭代动画代码，并需要搭配实际的预览与渲染环境；本项目不把Claude描述为独立的一键视频渲染器。
+可用的代码模型可把分镜和素材映射转成HTML/CSS/SVG/Canvas、Remotion或其他代码转视频项目。用对应环境预览和渲染实际文件。
 
 其他支持多图参考、长提示词、图层、时间线或代码动画的工具也可以使用同一套交付物。
 
@@ -78,7 +78,7 @@ Skill附带`scripts/package_mg_assets.ps1`，可根据JSON清单：
 - 保留透明PNG的Alpha；
 - 将完整场景统一成目标画幅；
 - 输出`图片01.png—图片NN.png`；
-- 生成编号清单和ZIP。
+- 生成编号清单，或通过 `-CreateZip` 归档当前已有文件。交付完整文稿和图片时，写完文稿后再打包。
 
 ## 仓库结构
 

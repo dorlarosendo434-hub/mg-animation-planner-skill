@@ -26,14 +26,24 @@ function Get-TargetSize {
     }
 }
 
-function Test-HasTransparency {
+function Test-TransparentPng {
     param([System.Drawing.Bitmap]$Bitmap)
 
-    $stepX = [Math]::Max(1, [int]($Bitmap.Width / 24))
-    $stepY = [Math]::Max(1, [int]($Bitmap.Height / 24))
-    for ($y = 0; $y -lt $Bitmap.Height; $y += $stepY) {
-        for ($x = 0; $x -lt $Bitmap.Width; $x += $stepX) {
-            if ($Bitmap.GetPixel($x, $y).A -lt 250) {
+    if ($Bitmap.RawFormat.Guid -ne [System.Drawing.Imaging.ImageFormat]::Png.Guid) {
+        return $false
+    }
+
+    $hasTransparentPixel = $false
+    $hasVisiblePixel = $false
+    for ($y = 0; $y -lt $Bitmap.Height; $y++) {
+        for ($x = 0; $x -lt $Bitmap.Width; $x++) {
+            if ($Bitmap.GetPixel($x, $y).A -eq 0) {
+                $hasTransparentPixel = $true
+            }
+            else {
+                $hasVisiblePixel = $true
+            }
+            if ($hasTransparentPixel -and $hasVisiblePixel) {
                 return $true
             }
         }
@@ -121,6 +131,7 @@ if ($items.Count -eq 0) {
 }
 
 $items = @($items | Sort-Object { [int]$_.index })
+Add-Type -AssemblyName System.Drawing
 for ($i = 0; $i -lt $items.Count; $i++) {
     $expectedIndex = $i + 1
     if ([int]$items[$i].index -ne $expectedIndex) {
@@ -133,6 +144,17 @@ for ($i = 0; $i -lt $items.Count; $i++) {
     if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
         throw "Source file not found at index $expectedIndex`: $sourcePath"
     }
+    if ($items[$i].kind -eq 'transparent') {
+        $bitmap = [System.Drawing.Bitmap]::FromFile($sourcePath)
+        try {
+            if (-not (Test-TransparentPng -Bitmap $bitmap)) {
+                throw "Transparent asset must be a PNG with fully transparent and visible pixels: $sourcePath"
+            }
+        }
+        finally {
+            $bitmap.Dispose()
+        }
+    }
     $items[$i].source = $sourcePath
 }
 
@@ -143,7 +165,6 @@ if (-not (Test-Path -LiteralPath $outputFullPath)) {
 $digits = [Math]::Max(2, $items.Count.ToString().Length)
 $nameFormat = '图片{0:D' + $digits + '}.png'
 $targetSize = Get-TargetSize -Ratio $AspectRatio
-Add-Type -AssemblyName System.Drawing
 
 $mappingPath = Join-Path $outputFullPath '00_图片编号清单.md'
 $zipPath = if ($CreateZip) { "$outputFullPath.zip" } else { $null }
@@ -182,15 +203,6 @@ foreach ($item in $items) {
     }
 
     if ($item.kind -eq 'transparent') {
-        $bitmap = [System.Drawing.Bitmap]::FromFile([string]$item.source)
-        try {
-            if (-not (Test-HasTransparency -Bitmap $bitmap)) {
-                throw "Transparent asset has no detectable transparent pixels: $($item.source)"
-            }
-        }
-        finally {
-            $bitmap.Dispose()
-        }
         Copy-Item -LiteralPath ([string]$item.source) -Destination $targetPath -Force:$Force
     }
     else {

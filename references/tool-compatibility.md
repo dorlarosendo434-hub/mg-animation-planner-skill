@@ -2,7 +2,7 @@
 
 只在用户指定生成平台、询问用什么工具，或准备把素材包投入制作时读取本文件。
 
-## 首选路径一：Fotor直接制作MG动效
+## 生成平台示例：Fotor直接制作MG动效
 
 Fotor适合直接消费本Skill输出的完整提示词和编号图片。
 
@@ -27,9 +27,9 @@ Fotor适合直接消费本Skill输出的完整提示词和编号图片。
 - Fotor AI Motion Graphics Generator: https://www.fotor.com/ai-video-generator/motion-graphics/
 - Fotor Video Agent: https://www.fotor.com/video/
 
-## 首选路径二：Claude Opus 5类模型＋代码转视频
+## 代码动画路径
 
-Claude Opus 5及同类高能力模型适合解释结构化分镜、生成动画代码、维护跨片段状态并迭代细节。它们需要搭配可执行或渲染环境，例如：
+可用的代码模型适合解释结构化分镜、生成动画代码、维护跨片段状态并迭代细节。实际文件需要在对应环境中预览或渲染，例如：
 
 - HTML/CSS/SVG；
 - Canvas/WebGL；
@@ -52,10 +52,6 @@ Claude Opus 5及同类高能力模型适合解释结构化分镜、生成动画�
 3. 文本用真实字体渲染，不把中文写进生成图片；
 4. 动效拆成可编辑图层或组件；
 5. 预览、检查裁切和字幕安全区后再渲染。
-
-官方入口：
-
-- Anthropic Claude Opus 5: https://www.anthropic.com/news/claude-opus-5
 
 ## 其他平台
 
